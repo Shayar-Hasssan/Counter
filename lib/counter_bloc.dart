@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:counter_test/counter_event.dart';
-
 class CounterBloc {
   int counter = 0;
   final _counterStateController = StreamController<int>();
