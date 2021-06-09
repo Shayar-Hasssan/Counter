@@ -32,6 +32,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final _bloc = CounterBloc();
+  int mycounter = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +43,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: StreamBuilder(
-          stream: _bloc.counter,
-          initialData: 0,
+          stream: _bloc.counterr,
+          initialData: mycounter,
           builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -55,6 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   '${snapshot.data}',
                   style: Theme.of(context).textTheme.headline4,
                 ),
+                TextFormField()
               ],
             );
           },
@@ -64,18 +66,24 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
-            onPressed: () => _bloc.counterEventSink.add(IncrementEvent()),
+            onPressed: () => _bloc.increment(mycounter).then((value) => {
+                  setState(() {
+                    mycounter = value;
+                  }),
+                  print('$value')
+                }),
             tooltip: 'Increment',
             child: Icon(Icons.add),
           ),
           SizedBox(
             width: 10.0,
           ),
-          FloatingActionButton(
-            onPressed: () => _bloc.counterEventSink.add(DecrementEvent()),
-            tooltip: 'Decrement',
-            child: Icon(Icons.remove),
-          ),
+          // FloatingActionButton(
+          //   onPressed: () =>
+          //       _bloc.decrement(counter).then((value) => {Text('$value')}),
+          //   tooltip: 'Decrement',
+          //   child: Icon(Icons.remove),
+          // ),
         ],
       ),
     );
