@@ -22,6 +22,7 @@ class PostBloc {
     apiProv.getPost().then((value) {
       return value;
     });
+    return response;
     // _inPosts.add(value)
   }
 
