@@ -1,5 +1,6 @@
 import 'package:counter_test/counter_bloc.dart';
 import 'package:counter_test/counter_event.dart';
+import 'package:counter_test/posts_bloc.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -32,7 +33,10 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final _bloc = CounterBloc();
+  final _postBloc = PostBloc();
+  var posts;
   int mycounter = 0;
+  String textt = 'Here you will get the Post you requested';
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   '${snapshot.data}',
                   style: Theme.of(context).textTheme.headline4,
                 ),
-                TextFormField()
+                Text('$textt'),
               ],
             );
           },
@@ -66,12 +70,22 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
-            onPressed: () => _bloc.increment(mycounter).then((value) => {
-                  setState(() {
-                    mycounter = value;
-                  }),
-                  print('$value')
-                }),
+            //TODO
+            onPressed: () {
+              _postBloc.getPosts(1).then((value)=> {setState(() {
+                textt = value;
+              }),
+              }),
+              
+              // });
+            },
+
+            //  _bloc.increment(mycounter).then((value) => {
+            //       setState(() {
+            //         mycounter = value;
+            //       }),
+            //       print('$value')
+            //     }),
             tooltip: 'Increment',
             child: Icon(Icons.add),
           ),

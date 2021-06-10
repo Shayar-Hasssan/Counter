@@ -13,16 +13,20 @@ class PostBloc {
   Sink<List<Posts>> get counterEventSink => _postEventController.sink;
 
   PostBloc() {
+    //TODO
     _postEventController.stream.listen(getPosts);
   }
 
   // Future<List<Posts>> getPosts() async {
-  List<Posts> getPosts(posts) {
+  // TODO
+  List<Posts> getPosts(event) {
     API_Provider apiProv;
+    List<Posts> postsLisst;
     apiProv.getPost().then((value) {
-      return value;
+      postsLisst = value;
     });
-    return response;
+    return postsLisst;
+
     // _inPosts.add(value)
   }
 
