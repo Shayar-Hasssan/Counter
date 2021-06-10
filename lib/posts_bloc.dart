@@ -14,18 +14,17 @@ class PostBloc {
 
   PostBloc() {
     //TODO
-    _postEventController.stream.listen(getPosts);
+    // _postEventController.stream.listen(getPosts);
   }
 
   // Future<List<Posts>> getPosts() async {
   // TODO
-  List<Posts> getPosts(event) {
-    API_Provider apiProv;
-    List<Posts> postsLisst;
+  Future<List<Posts>> getPosts() {
+    API_Provider apiProv = new API_Provider();
+    // List<Posts> postsLisst;
     apiProv.getPost().then((value) {
-      postsLisst = value;
+      return value;
     });
-    return postsLisst;
 
     // _inPosts.add(value)
   }

@@ -72,12 +72,12 @@ class _MyHomePageState extends State<MyHomePage> {
           FloatingActionButton(
             //TODO
             onPressed: () {
-              _postBloc.getPosts(1).then((value)=> {setState(() {
-                textt = value;
-              }),
-              }),
-              
-              // });
+              _postBloc.getPosts().then((value) => {
+                    setState(() {
+                      textt = value.toString();
+                    }),
+                    print(value)
+                  });
             },
 
             //  _bloc.increment(mycounter).then((value) => {
