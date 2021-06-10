@@ -71,21 +71,23 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           FloatingActionButton(
             //TODO
-            onPressed: () {
-              _postBloc.getPosts(1).then((value)=> {setState(() {
-                textt = value;
-              }),
-              }),
-              
+            onPressed: () async {
+              await _bloc.increment(mycounter).then((value) => {
+                    setState(() {
+                      mycounter = value;
+                    }),
+                    print('$value')
+                  });
+
+              await _postBloc.getPosts().then((value) {
+                setState(() {
+                  textt = value.first.body;
+                });
+              });
+
               // });
             },
 
-            //  _bloc.increment(mycounter).then((value) => {
-            //       setState(() {
-            //         mycounter = value;
-            //       }),
-            //       print('$value')
-            //     }),
             tooltip: 'Increment',
             child: Icon(Icons.add),
           ),
