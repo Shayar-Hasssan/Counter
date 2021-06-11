@@ -1,6 +1,7 @@
-import 'package:counter_test/counter_bloc.dart';
+import 'package:counter_test/bloc/counter_bloc.dart';
+// ignore: unused_import
 import 'package:counter_test/counter_event.dart';
-import 'package:counter_test/posts_bloc.dart';
+import 'package:counter_test/bloc/posts_bloc.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -70,22 +71,21 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
-            //TODO
-            onPressed: () {
-              _postBloc.getPosts().then((value) => {
+            onPressed: () async {
+              await _bloc.increment(mycounter).then((value) => {
                     setState(() {
-                      textt = value.toString();
+                      mycounter = value;
                     }),
-                    print(value)
+                    print('$value')
                   });
-            },
 
-            //  _bloc.increment(mycounter).then((value) => {
-            //       setState(() {
-            //         mycounter = value;
-            //       }),
-            //       print('$value')
-            //     }),
+              await _postBloc.getPosts().then((value) {
+                setState(() {
+                  textt = value[58].body.toString();
+                  // textt = value.first.body;
+                });
+              });
+            },
             tooltip: 'Increment',
             child: Icon(Icons.add),
           ),

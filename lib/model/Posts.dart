@@ -1,12 +1,14 @@
 // To parse this JSON data, do
 //
-//     final dummy = dummyFromJson(jsonString);
+//     final posts = postsFromJson(jsonString);
 
 import 'dart:convert';
 
-Posts dummyFromJson(String str) => Posts.fromJson(json.decode(str));
+List<Posts> postsFromJson(String str) =>
+    List<Posts>.from(json.decode(str).map((x) => Posts.fromJson(x)));
 
-String dummyToJson(Posts data) => json.encode(data.toJson());
+String postsToJson(List<Posts> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Posts {
   Posts({
@@ -27,8 +29,7 @@ class Posts {
         title: json["title"],
         body: json["body"],
       );
-  List<Posts> fromJson(String str) =>
-      List<Posts>.from(json.decode(str).map((x) => Posts.fromJson(x)));
+
   Map<String, dynamic> toJson() => {
         "userId": userId,
         "id": id,
